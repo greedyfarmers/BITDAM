@@ -2,7 +2,7 @@
 // DC 페이지는 브라우저 JS로 그려지므로 크롤러가 받는 첫 응답에 제목·헤딩·핵심 본문이 없다.
 // 여기 값이 그 첫 응답을 채운다. 화면 렌더링에는 영향이 없다.
 
-export const SITE = 'https://www.prornco.com';
+export const SITE = 'https://www.bitdamlight.com';
 
 const enc = (name) => encodeURI(name);
 

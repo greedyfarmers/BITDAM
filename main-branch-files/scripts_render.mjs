@@ -1,7 +1,7 @@
 // 순수 함수만 둡니다 (node API·네트워크 없음). build-blog.mjs가 이 모듈을 불러 씁니다.
 // 테스트 가능하도록 파일시스템 접근을 분리했습니다.
 
-export const SITE = 'https://www.prornco.com';
+export const SITE = 'https://www.bitdamlight.com';
 export const BLOG_PATH = '/blog';
 export const SERVED_LOCALES = ['ko'];
 export const DEFAULT_LOCALE = 'ko';
