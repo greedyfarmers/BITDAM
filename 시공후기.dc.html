@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Expanded:wght@800;900&display=swap">
+  <script src="./protect.js"></script>
+  <script src="./image-slot.js"</script>
+  <script src="./mobile-nav.js"></script>
+  <style>
+    body{margin:0;}
+    @font-face{font-family:'ArchivoExpandedBlack';src:url('./assets/fonts/Archivo_Expanded-Black.ttf') format('truetype');font-weight:900;}
+    a{text-decoration:none;color:inherit;}
+    a:hover{color:#2F6FED;}
+    @keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+    @keyframes ringPulse{0%{transform:scale(1);opacity:.55;}70%{transform:scale(1.5);opacity:0;}100%{transform:scale(1.5);opacity:0;}}
+    [data-fab]{position:relative; width:66px; height:66px; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; font-size:11.5px; font-weight:800; letter-spacing:-0.3px; line-height:1.2; text-align:center; box-shadow:0 14px 30px rgba(15,20,32,0.20); transition:transform .18s ease, box-shadow .18s ease; animation:floatY 3.4s ease-in-out infinite;}
+    [data-fab]:hover{transform:translateY(-4px) scale(1.05); box-shadow:0 20px 40px rgba(15,20,32,0.26);}
+    [data-fab] [data-ico]{font-size:17px; line-height:1;}
+    [data-fab] [data-ring]{position:absolute; inset:-1px; border-radius:50%; border:2px solid currentColor; animation:ringPulse 2.4s ease-out infinite; pointer-events:none;}
+    @media (max-width: 720px){
+      [data-fabwrap]{right:12px !important;bottom:84px !important;gap:8px !important;}
+      [data-fab]{width:60px !important;height:60px !important;font-size:10.5px !important;gap:2px !important;}
+      [data-fab] [data-ico]{font-size:20px !important;}
+      [data-fab] [data-ring]{display:none !important;}
+      [data-fabwrap] > a:last-child{width:44px !important;height:44px !important;font-size:16px !important;}
+      [data-fab] [data-ring]{display:none !important;}
+    }
+    [data-gnb] > a{font-size:14px;color:var(--ink-soft);}
+    [data-gnb]:hover > a{color:var(--ink);}
+    [data-drop]{position:absolute;top:28px;left:50%;transform:translateX(-50%);background:#fff;min-width:190px;padding:12px 0;border-radius:14px;border:1px solid #E8E6E0;box-shadow:0 18px 40px rgba(15,20,32,0.12);opacity:0;visibility:hidden;transition:opacity .18s ease,visibility .18s ease;z-index:90;}
+    [data-gnb]:hover [data-drop]{opacity:1;visibility:visible;}
+    [data-drop] a{display:block;padding:9px 20px;font-size:13px;color:var(--ink-soft);white-space:nowrap;}
+    [data-drop] a:hover{color:var(--accent);background:rgba(47,111,237,0.06);}
+    @media (min-width: 721px) and (max-width: 1340px){
+      [data-r="summary"]{padding-right:112px !important;}
+    }
+    @media (max-width: 720px){
+      [data-r="tiles"]{margin-right:-1rem !important;padding-right:1rem !important;gap:0.5rem !important;justify-content:flex-start !important;}
+      [data-r="tiles"]::-webkit-scrollbar{display:none !important;}
+      [data-r="revlist"]{display:grid !important;grid-template-columns:repeat(2,1fr) !important;gap:1rem 0.625rem !important;}
+      [data-r="revcard"]{flex-direction:column !important;align-items:stretch !important;border:0 !important;background:transparent !important;border-radius:0 !important;padding:0 !important;box-shadow:none !important;}
+      [data-r="revcard-x"]{box-shadow:0 1px 3px rgba(15,20,32,0.07) !important;}
+      [data-r="revphoto"]{flex:none !important;width:100% !important;aspect-ratio:1/1 !important;border-radius:0.5rem !important;}
+      [data-r="revbody"]{padding:0.625rem 0.125rem 0 !important;gap:0.25rem !important;min-width:0 !important;}
+      [data-r="revtop"]{font-size:0.6875rem !important;justify-content:flex-start !important;gap:0.4375rem !important;}
+      [data-r="revtitle"]{font-size:0.9375rem !important;line-height:1.4 !important;display:-webkit-box !important;-webkit-line-clamp:2 !important;-webkit-box-orient:vertical !important;overflow:hidden !important;}
+      [data-r="revtext"]{display:none !important;}
+      [data-r="revtags"]{display:none !important;}
+      [data-r="revfoot"]{flex-direction:row !important;align-items:center !important;justify-content:space-between !important;gap:0.375rem !important;margin-top:0.25rem !important;padding-top:0 !important;border-top:0 !important;font-size:0.6875rem !important;font-size:0.75rem !important;}
+      [data-r="revfoot"] > span:first-child{font-weight:800 !important;color:var(--ink) !important;}
+    }
+    @media (max-width: 1024px){
+      [style*="grid-template-columns: repeat(4"]{grid-template-columns:repeat(2,1fr) !important;}
+      [style*="grid-template-columns: repeat(3"]{grid-template-columns:repeat(2,1fr) !important;}
+      nav{gap:14px !important;} nav a, nav div{font-size:13px !important;}
+    }
+    @media (max-width: 720px){
+      [style*="grid-template-columns"]:not([data-r="revlist"]){grid-template-columns:1fr !important;}
+      header{padding:0.875rem 1rem !important; flex-wrap:nowrap !important; gap:0 !important;}
+      header > nav{display:none !important;}
+      header > div{display:none !important;}
+      nav{flex-wrap:wrap !important; gap:10px !important;} nav a, nav div{font-size:12.5px !important;}
+      h1{font-size:22px !important;} h2{font-size:20px !important;} h3{font-size:18px !important;}
+      [style*="max-width: 1160px"], [style*="max-width: 1240px"]{padding-left:16px !important; padding-right:16px !important;}
+      [style*="position: fixed"][style*="right: 26px"]{right:12px !important;}
+    }
+  </style>
+</helmet>
+
+<div style="--bg:#FFFFFF;--ink:#111111;--ink-soft:#6B6B6B;--line:#E9E9E9;--accent:#2F6FED;--surface-dark:#0A0A0A;--surface-dark-2:#141824; background:var(--bg); color:var(--ink); font-family:'Archivo','Pretendard',-apple-system,BlinkMacSystemFont,sans-serif; -webkit-font-smoothing:antialiased;">
+
+  <header style="border-bottom:1px solid var(--line); padding:18px 32px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:#fff; z-index:50;">
+    <a href="./PRORCO 홈페이지.dc.html" style="font-size:21px; font-weight:900; letter-spacing:-0.5px; font-family:'Archivo Expanded','ArchivoExpandedBlack',sans-serif;">PROR.CO</a>
+    <nav style="display:flex; gap:22px; align-items:center;">
+      <div data-gnb="1" style="position:relative; padding:6px 0;"><a href="./시공패키지.dc.html">시공패키지</a><div data-drop="1"><a href="./간접조명패키지.dc.html">간접조명 패키지</a><a href="./우물천장패키지.dc.html">우물천장 패키지</a><a href="./우물천장실링팬패키지.dc.html">우물천장 + 실링팬 패키지</a><a href="./실링팬패키지.dc.html">실링팬 패키지</a></div></div>
+      <a href="./상세견적.dc.html" style="font-size:14px; color:var(--accent); font-weight:800;" style-hover="opacity:0.75;">셀프견적</a>
+      <div data-gnb="1" style="position:relative; padding:6px 0;"><a href="./개별항목.dc.html">개별항목</a><div data-drop="1"><a href="./개별항목.dc.html">우물천장조명</a><a href="./개별항목.dc.html">커튼조명</a><a href="./개별항목.dc.html">다운라이트 · COB</a><a href="./개별항목.dc.html">욕실·현관 센서등</a><a href="./개별항목.dc.html">실링팬</a></div></div>
+      <a href="./색상안내.dc.html" style="font-size:14px; color:var(--ink-soft);" style-hover="color:var(--accent);">색상안내</a>
+      <a href="./시공사례.dc.html" style="font-size:14px; color:var(--ink-soft);" style-hover="color:var(--accent);">시공사례</a>
+      <a href="./시공후기.dc.html" style="font-size:14px; color:var(--accent); font-weight:700;">시공후기</a>
+      <a href="./고객센터.dc.html" style="font-size:14px; color:var(--ink-soft);" style-hover="color:var(--accent);">고객센터</a>
+    </nav>
+    <div style="font-size:13px; color:var(--ink-soft);">전화상담 <b style="color:var(--ink);">010-9850-2293</b></div>
+    <mobile-nav current="시공후기"></mobile-nav>
+  </header>
+
+  <div data-fabwrap="1" style="position:fixed; right:26px; bottom:110px; z-index:55; display:flex; flex-direction:column; gap:12px; align-items:center;">
+    <a href="tel:010-9850-2293" data-fab="1" style="background:radial-gradient(circle at 34% 26%, #2a3a63, #0E1526 72%); color:#fff; border:1px solid rgba(255,255,255,0.14);">
+      <span data-ring="1" style="color:rgba(255,255,255,0.35);"></span>
+      <span data-ico="1">📞</span>
+      <span>전화상담</span>
+    </a>
+    <a href="http://pf.kakao.com/_xdBVxaX/chat" target="_blank" rel="noopener" data-fab="1" style="background:radial-gradient(circle at 34% 26%, #FFF4A0, #FFE94A 70%); color:#2C2200; border:1px solid rgba(0,0,0,0.08);">
+      <span data-ico="1">💬</span>
+      <span>카톡상담</span>
+    </a>
+    <a href="#" style="width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--ink); font-size:16px; border:1px solid var(--line); background:rgba(255,255,255,0.92); box-shadow:0 10px 22px rgba(15,20,32,0.12);">↑</a>
+  </div>
+
+  <div style="max-width:1240px; margin:0 auto; padding:48px 32px 0;">
+    <div style="font-size:11.5px; letter-spacing:1.5px; color:var(--accent); font-weight:700; margin-bottom:10px;">PROR.CO REVIEW</div>
+    <h1 style="font-size:30px; font-weight:800; margin:0 0 10px; line-height:1.3;">시공후기</h1>
+    <p style="color:var(--ink-soft); font-size:14px; margin:0 0 32px; line-height:1.75; max-width:660px;">시공을 마친 고객님들이 직접 남겨주신 후기입니다. 사진과 함께 올려주신 내용을 그대로 담았습니다.</p>
+
+    <!-- summary -->
+    <div data-r="summary" style="display:flex; align-items:center; justify-content:center; gap:3rem; flex-wrap:wrap; background:#F4F7FE; border:1px solid rgba(47,111,237,0.14); border-radius:1.25rem; padding:2rem 2.5rem; margin-bottom:36px;">
+      <div style="text-align:center;">
+        <div style="font-size:2.75rem; font-weight:900; line-height:1; letter-spacing:-0.03em; color:var(--accent);">4.9</div>
+        <div style="font-size:1.125rem; color:var(--accent); letter-spacing:0.15em; margin:0.5rem 0 0.625rem;">★★★★★</div>
+        <div style="font-size:1.0625rem; font-weight:800; letter-spacing:-0.02em; color:var(--ink);">총 <span style="color:var(--accent);">{{ totalCount }}</span>개의 후기</div>
+        <div data-r="hilite" style="display:inline-flex; align-items:center; gap:0.375rem; margin-top:0.625rem; padding:0.4375rem 0.875rem; border-radius:999px; background:var(--accent); color:#fff; font-size:0.8125rem; font-weight:800; white-space:nowrap;">
+          <span style="font-size:0.75rem;">★</span>5점 {{ topPctLabel }}
+        </div>
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:1.25rem;">
+        <sc-for list="{{ distribution }}" as="d" hint-placeholder-count="5">
+          <div style="width:1.25rem; text-align:center;">
+            <sc-if value="{{ d.isTop }}" hint-placeholder-val="{{ true }}">
+              <div style="display:inline-block; background:var(--accent); color:#fff; font-size:0.6875rem; font-weight:800; padding:0.1875rem 0.375rem; border-radius:0.375rem; margin-bottom:0.375rem; white-space:nowrap;">{{ d.pctLabel }}</div>
+            </sc-if>
+            <div style="position:relative; height:4rem; border-radius:999px; background:#E4EAF7; overflow:hidden;">
+              <div style="{{ d.colStyle }}"></div>
+            </div>
+            <div style="font-size:0.75rem; color:var(--ink-soft); margin-top:0.5rem; white-space:nowrap;">{{ d.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- category tiles -->
+    <div data-r="tiles" style="display:flex; gap:0.75rem; justify-content:center; overflow-x:auto; padding:0.25rem 0 1.25rem; scrollbar-width:none; -ms-overflow-style:none;">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="6">
+        <div onClick="{{ f.onClick }}" style="{{ f.tileWrapStyle }}">
+          <div style="{{ f.tileStyle }}">{{ f.icon }}</div>
+          <div style="{{ f.tileLabelStyle }}">{{ f.label }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- sort -->
+    <div style="display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; gap:16px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:14px 0; margin-bottom:28px;">
+      <div style="display:flex; gap:14px; align-items:center;">
+        <sc-for list="{{ sorts }}" as="so" hint-placeholder-count="2">
+          <div onClick="{{ so.onClick }}" style="{{ so.style }}">{{ so.label }}</div>
+        </sc-for>
+      </div>
+    </div>
+
+
+  </div>
+
+  <sc-if value="{{ zoomOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeZoom }}" style="position:fixed; inset:0; z-index:300; background:rgba(8,11,20,0.88); display:flex; align-items:center; justify-content:center; padding:24px; animation:fadeIn .16s ease;">
+      <div data-r="zoombox" style="position:relative; width:100%; max-width:56rem; max-height:88vh; display:flex; flex-direction:column; gap:14px;">
+        <div onClick="{{ stopProp }}" style="{{ zoomImgStyle }}"></div>
+        <div onClick="{{ stopProp }}" style="color:#fff; display:flex; flex-direction:column; gap:6px;">
+          <div style="font-size:14px; color:#7FA4FF; letter-spacing:1.5px;">{{ zoomStars }}</div>
+          <div style="font-size:17px; font-weight:800; letter-spacing:-0.02em; line-height:1.45;">{{ zoomTitle }}</div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.72); line-height:1.75;">{{ zoomBody }}</div>
+          <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:2px;">{{ zoomMeta }}</div>
+        </div>
+        <div onClick="{{ closeZoom }}" style="position:absolute; top:-6px; right:-6px; width:2.75rem; height:2.75rem; border-radius:50%; background:rgba(255,255,255,0.14); color:#fff; font-size:20px; display:flex; align-items:center; justify-content:center; cursor:pointer;" style-hover="background:rgba(255,255,255,0.26);">✕</div>
+        <div onClick="{{ prevZoom }}" style="{{ zoomPrevStyle }}">‹</div>
+        <div onClick="{{ nextZoom }}" style="{{ zoomNextStyle }}">›</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- review list -->
+  <div style="max-width:1240px; margin:0 auto; padding:0 32px;">
+    <div data-r="revlist" style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+      <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="9">
+        <div data-r="revcard" style="border:1px solid var(--line); display:flex; flex-direction:column;">
+          <div data-r="revphoto" onClick="{{ r.onZoom }}" style="position:relative; width:100%; aspect-ratio:4/3; overflow:hidden; background:#F2F4F7; cursor:zoom-in;">
+            <image-slot id="{{ r.photoId }}" style="position:absolute; inset:0; width:100%; height:100%;" shape="rect" placeholder="{{ r.photoHint }}"></image-slot>
+          </div>
+          <div data-r="revbody" style="padding:20px; display:flex; flex-direction:column; gap:10px; flex:1;">
+            <div data-r="revtop" style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <div style="font-size:14px; color:var(--accent); letter-spacing:1.5px;">{{ r.stars }}</div>
+              <div style="font-size:12px; color:#6B6B6B;">{{ r.date }}</div>
+            </div>
+            <div data-r="revtitle" style="font-size:15px; font-weight:800; line-height:1.5;">{{ r.title }}</div>
+            <div data-r="revtext" style="font-size:12.8px; color:var(--ink-soft); line-height:1.85;">{{ r.body }}</div>
+            <div data-r="revtags" style="display:flex; gap:6px; flex-wrap:wrap; margin-top:2px;">
+              <sc-for list="{{ r.tags }}" as="tg" hint-placeholder-count="2">
+                <span style="font-size:11px; font-weight:700; color:var(--accent); background:rgba(47,111,237,0.08); padding:4px 10px;">{{ tg }}</span>
+              </sc-for>
+            </div>
+            <div data-r="revfoot" style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:14px; border-top:1px solid var(--line); font-size:12px; color:var(--ink-soft);">
+              <span>{{ r.author }}</span>
+              <span>{{ r.meta }}</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+      <div style="border:1px solid var(--line); padding:60px; text-align:center; color:var(--ink-soft); font-size:13.5px;">선택한 조건의 후기가 아직 없습니다.</div>
+    </sc-if>
+
+    <sc-if value="{{ showPager }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:44px;">
+        <div onClick="{{ prev.onClick }}" style="{{ prev.style }}">{{ prev.label }}</div>
+        <sc-for list="{{ pageItems }}" as="pi" hint-placeholder-count="7">
+          <div onClick="{{ pi.onClick }}" style="{{ pi.style }}">{{ pi.label }}</div>
+        </sc-for>
+        <div onClick="{{ next.onClick }}" style="{{ next.style }}">{{ next.label }}</div>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="max-width:640px; margin:70px auto 0; padding:0 24px 90px; text-align:center;">
+    <div style="font-size:11px; letter-spacing:1.5px; color:var(--accent); font-weight:700; margin-bottom:10px;">CONSULT</div>
+    <div style="font-size:22px; font-weight:800; margin-bottom:10px;">후기 보고 마음이 정하셨나요?</div>
+    <div style="font-size:13.5px; color:var(--ink-soft); margin-bottom:22px; line-height:1.7;">평형과 원하시는 항목만 알려주시면<br/>정찰제 금액 그대로 안내드립니다.</div>
+    <div style="display:flex; gap:12px; justify-content:center;">
+      <a href="./상세견적.dc.html" style="display:inline-block; background:var(--accent); color:#fff; padding:15px 26px; font-size:14px; font-weight:700;">셀프견적 시작하기</a>
+      <a href="tel:010-9850-2293" style="display:inline-block; background:var(--surface-dark); color:#fff; padding:15px 26px; font-size:14px; font-weight:700;">전화로 상담하기</a>
+    </div>
+  </div>
+
+  <footer style="background:var(--surface-dark); color:#B8B8B8; padding:30px 0;">
+    <div style="max-width:1240px; margin:0 auto; padding:0 32px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:12px;">
+      <a href="./PRORCO 홈페이지.dc.html" style="color:#fff; font-weight:900; font-size:15px; font-family:'Archivo Expanded','ArchivoExpandedBlack',sans-serif;">PROR.CO</a>
+      <span>상호 프로어앤코 · 대표 김동준 · 사업자등록번호 241-10-02476</span>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { filter: '우물천장', sort: '최신순', page: 1, zoom: null, zoomSrc: '' };
+
+  componentDidMount() {
+    this._onKey = (e) => {
+      if (this.state.zoom === null || this.state.zoom === undefined) return;
+      if (e.key === 'Escape') this.setState({ zoom: null, zoomSrc: '' });
+      if (e.key === 'ArrowLeft') this._step && this._step(-1);
+      if (e.key === 'ArrowRight') this._step && this._step(1);
+    };
+    window.addEventListener('keydown', this._onKey);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this._onKey);
+  }
+  perPage = 9;
+
+  filterList = ['우물천장', '커튼조명', 'COB · 다운라이트', '센서등', '실링팬', '전체'];
+  sortList = ['최신순', '별점순'];
+
+  reviewData = [
+    { rating: 5, date: '2026.08.18', order: 12, cat: '우물천장', title: '메인등 없앴는데 오히려 더 밝아요', body: '한방우물천장으로 시공했는데 마감선이 정말 깔끔합니다. 처음엔 메인등 없이 어두울까 걱정했는데 2줄 넣으니 충분히 밝아요.', author: '서울 김○○님', meta: '34평 · 우물천장 패키지', tags: ['우물천장', '2줄 시공'] },
+    { rating: 5, date: '2026.08.14', order: 11, cat: 'COB · 다운라이트', title: '견적서에 나온 금액 그대로였어요', body: '다른 곳은 실측 후에 계속 금액이 올라갔는데, 여기는 안내받은 금액에서 변동이 없었습니다. 다운라이트 위치도 꼼꼼히 잡아주셨어요.', author: '인천 박○○님', meta: '25평 · 간접조명 패키지', tags: ['정찰제', '다운라이트'] },
+    { rating: 5, date: '2026.08.09', order: 10, cat: '커튼조명', title: '커튼조명이 제일 만족스러워요', body: '가장 저렴한 항목인데 체감은 가장 큽니다. 저녁에 커튼조명만 켜두면 카페 같은 분위기가 됩니다.', author: '부천 이○○님', meta: '33평 · 개별시공', tags: ['커튼조명', 'T5'] },
+    { rating: 5, date: '2026.08.03', order: 9, cat: '실링팬', title: '실링팬 조명 겸용으로 정답이었네요', body: '천장 보강까지 같이 해주셔서 흔들림이 전혀 없습니다. 여름에 에어컨 바람이 골고루 퍼져서 확실히 시원해요.', author: '남양주 최○○님', meta: '32평 · 우물천장 + 실링팬', tags: ['실링팬', '천장보강'] },
+    { rating: 4, date: '2026.07.29', order: 8, cat: '센서등', title: '현관 센서등, 왜 이제 했을까', body: '장 들고 들어올 때 스위치 찾을 필요가 없어졌습니다. 다만 감지 범위를 처음에 조정하는 데 시간이 조금 걸렸어요.', author: '성남 정○○님', meta: '41평 · 개별시공', tags: ['센서등', '현관'] },
+    { rating: 5, date: '2026.07.22', order: 7, cat: '우물천장', title: '입주 전에 목공으로 한 게 최선', body: '기존 몰딩을 전부 걷어내고 새로 만들어주셔서 흔적이 하나도 없습니다. 도배까지 연결해주셔서 마감이 완벽해요.', author: '수원 한○○님', meta: '45평 · 목공 무몰딩', tags: ['목공 우물천장', '무몰딩'] },
+    { rating: 5, date: '2026.07.15', order: 6, cat: 'COB · 다운라이트', title: '아트월 COB 스팟이 포인트', body: '그림 걸어둔 벽에 COB를 쏴주셨는데, 갤러리 온 것 같습니다. 호른형으로 골랐는데 디자인도 예뻐요.', author: '용인 오○○님', meta: '42평 · 개별시공', tags: ['COB', '호른형'] },
+    { rating: 5, date: '2026.07.08', order: 5, cat: '센서등', title: '욕실 히든센서 강력 추천', body: '천장을 뚫지 않고 내부에 넣는 방식이라 깔끔합니다. 밤에 화장실 갈 때 눈 부시지 않아서 좋아요.', author: '김포 서○○님', meta: '27평 · 개별시공', tags: ['히든센서', '욕실'] },
+    { rating: 4, date: '2026.06.30', order: 4, cat: '우물천장', title: '색온도 고민했는데 2줄이 답', body: '전구색과 주백색 두 줄로 넣어서 상황에 맞게 켭니다. 손님 오면 둘 다 켜고, 평소엔 전구색만 켜요.', author: '고양 윤○○님', meta: '31평 · 우물천장 패키지', tags: ['3색변환', '2줄 시공'] },
+    { rating: 5, date: '2026.06.24', order: 3, cat: '커튼조명', title: 'ㄱ자 커튼조명도 깔끔하게', body: '코너 창이라 걱정했는데 꺾이는 부분에서 빛이 끊기지 않게 시공해주셨습니다.', body2: '', author: '하남 강○○님', meta: '54평 · 개별시공', tags: ['ㄱ자형', '커튼조명'] },
+    { rating: 5, date: '2026.06.17', order: 2, cat: '실링팬', title: '팬 단독으로도 충분했어요', body: '서재라 조명은 기존 걸 유지하고 팬만 달았습니다. 소음이 거의 없어서 만족합니다.', author: '광명 임○○님', meta: '27평 · 실링팬 패키지', tags: ['실링팬', '팬 단독'] },
+    { rating: 5, date: '2026.06.10', order: 1, cat: 'COB · 다운라이트', title: '주방 하부등 만족도 최고', body: '싱크대 아래 조명 하나로 설거지할 때 훨씬 편해졌습니다. 금액도 부담 없었어요.', author: '안양 노○○님', meta: '25평 · 개별시공', tags: ['하부등', '주방'] },
+  ];
+
+  regions = ['서울 강서', '서울 노원', '서울 은평', '서울 관악', '인천 송도', '인천 계양', '수원 영통', '용인 기흥', '성남 분당', '고양 일산', '부천 상동', '안양 평촌', '광명 철산', '하남 미사', '남양주 다산', '김포 한강', '의정부 민락', '천안 불당', '청주 오창', '대전 도안', '세종 새롬', '대구 수성', '부산 해운대', '창원 성산', '광주 수완'];
+  surnames = ['김', '이', '박', '최', '정', '강', '조', '윤', '장', '임', '한', '오', '서', '신', '권', '황', '안', '송', '류', '전'];
+  sizes = ['24평', '25평', '27평', '31평', '32평', '33평', '34평', '38평', '41평', '45평', '49평', '54평'];
+
+  tails = ['다음에 이사 가도 또 맡기고 싶습니다.', '주변에서도 어디서 했냐고 자주 물어봅니다.', '가격표가 미리 공개돼 있어 상담이 편했습니다.', '작업 후 정리까지 깔끔하게 해주셨습니다.', '시공 시간도 안내받은 그대로였습니다.', '사진으로 미리 보여주셔서 결정이 쉬웠습니다.', '작은 요청도 그 자리에서 반영해주셨습니다.'];
+
+  leads = ['입주 전에 진행했는데', '거주 중에 시공했는데', '이사 전날 급하게 했는데', '구축 아파트인데', '신축 입주라 같이 했는데', '도배 없이 했는데', '리모델링 없이 했는데', '하루 만에 끝났는데', '가구 다 들어온 뒤에 했는데', '상담만 받아보려 했는데'];
+
+  templates = {
+    '우물천장': {
+      pkg: ['우물천장 패키지', '목공 우물천장', '한방 우물천장'],
+      titles: [
+        '천장 라인이 살아나니 집이 넓어 보여요', '메인등 떼고 우물조명으로 바꿨습니다', '마감선이 자로 잰 듯 반듯해요',
+        '두 줄 시공, 안 했으면 후회할 뻔', '거실이 완전히 다른 집이 됐어요', '한방 방식이라 도배를 안 해도 됐어요',
+        '몰딩 흔적 없이 깔끔하게 정리됐습니다', '무몰딩 직각 라인이 기대 이상이에요', '천장 높이가 낮아 보일까 걱정했는데',
+        '빛이 끊기는 구간이 하나도 없습니다', '조명만 바꿨는데 집값 오른 기분이에요', '구축 아파트인데 신축처럼 나왔습니다',
+        '실측 때 설명해주신 그대로 나왔어요', '우물 안쪽 도배까지 해주셔서 좋았습니다', '가구 안 옮기고도 하루에 끝났어요',
+        '전구색 한 줄, 주백색 한 줄로 넣었습니다', '라운드 마감으로 바꾼 게 만족스러워요', '거실 천장만 손봤는데 집 전체가 달라졌어요',
+        '메인등 없이 지내는데 전혀 어둡지 않아요', '5.6m 넘는 긴 면도 이음새 없이 깔끔', '이사 전날 급하게 요청드렸는데도',
+        '천장 구조부터 확인해주셔서 안심됐어요', '저녁마다 거실에 앉아 있게 됩니다', '시공 후 정리까지 흔적 없이 마무리',
+      ],
+      bodies: ['시공 전에 천장 구조를 먼저 확인해주시고 가능한 라인을 그림으로 보여주셔서 이해가 쉬웠습니다. 결과물도 설명 그대로였어요.', '기존 몰딩을 걷어내고 새로 잡아주셔서 이전 흔적이 남지 않았습니다. 마감이 깔끔해서 만족합니다.', '조명을 켰을 때 빛이 끊기는 구간 없이 고르게 퍼집니다. 저녁에 거실에 앉아 있는 시간이 늘었어요.', '두 줄로 넣어두니 상황에 따라 밝기를 조절할 수 있어 편합니다. 평소엔 한 줄, 손님 오면 둘 다 켭니다.'],
+      tags: [['우물천장', '2줄 시공'], ['목공 우물천장', '무몰딩'], ['한방 우물천장', '몰딩'], ['우물천장', '거실']],
+    },
+    '커튼조명': {
+      pkg: ['개별시공', '간접조명 패키지'],
+      titles: [
+        '커튼조명 하나로 분위기가 달라졌어요', '금액 대비 체감이 가장 큰 항목', '창가에 앉아 있는 시간이 늘었습니다',
+        '커튼박스 라인이 예쁘게 나왔어요', 'ㄱ자 코너도 빛이 끊기지 않아요', '10만원으로 이만한 변화는 없습니다',
+        '커튼 원단에 빛이 번지는 게 예뻐요', '조명 하나로 카페 같은 거실이 됐어요', '전구색으로 고른 게 정답이었습니다',
+        '아이 재울 때 이 조명만 켜둡니다', '눈이 편해서 밤에 오래 앉아 있어요', '창 길이가 긴데도 밝기가 균일합니다',
+        '커튼 걷었을 때 조명이 안 보여서 깔끔', '주백색으로 했는데 생각보다 시원해요', '두 곳 다 하니 거실이 훨씬 넓어 보여요',
+        '가구 다 들어온 뒤에 했는데 문제없었어요', '스위치 위치까지 같이 잡아주셨습니다', '리모델링 없이 이것만 했는데 만족',
+        '침실에도 추가하고 싶어졌습니다', '커튼박스 안쪽 마감이 꼼꼼해요', '설치 자리 먼저 보여주셔서 결정이 쉬웠어요',
+        '5m 넘는 구간도 추가금 안내받은 그대로', '저녁 공기가 달라진 느낌입니다', '손님들이 제일 먼저 물어보는 조명',
+      ],
+      bodies: ['비용은 가장 낮은 항목인데 저녁에 느끼는 차이는 제일 큽니다. 이 조명만 켜두고 지내는 날이 많아요.', '원단 위로 빛이 부드럽게 퍼져서 오래 앉아 있어도 눈이 편합니다. 색온도는 전구색으로 정했습니다.', '코너 창이라 걱정했는데 꺾이는 구간에서도 빛이 끊기지 않게 잡아주셨습니다.', '커튼박스 안쪽에 넣는 방식이라 커튼을 걷어도 조명이 보이지 않습니다. 겉으로는 아무것도 없는 것처럼 깔끔해요.', '창 길이가 길어 밝기가 고르지 않을까 걱정했는데 처음부터 끝까지 균일합니다.'],
+      tags: [['커튼조명', 'T5'], ['커튼박스', '전구색'], ['ㄱ자형', '커튼조명']],
+    },
+    'COB · 다운라이트': {
+      pkg: ['개별시공', '간접조명 패키지'],
+      titles: [
+        '다운라이트 위치를 꼼꼼히 잡아주셨어요', '아트월 COB가 이 집의 포인트', '주방 하부등, 왜 이제 했을까요',
+        '견적 금액 그대로였습니다', '3인치로 통일하니 천장이 깔끔해요', '그림자 지는 자리가 하나도 없어요',
+        '2인치로 바꿨는데 훨씬 고급스러워요', '호른형이라 눈부심이 적습니다', '싱크대 앞이 환해져 설거지가 편해요',
+        '복도 다운라이트 간격이 딱 맞습니다', '가구 배치 먼저 물어봐주셔서 좋았어요', '색온도 3가지 중에 골라서 시공했습니다',
+        '천장 타공 자리가 자로 잰 듯 정렬됐어요', '주광색으로 했는데 서재에 딱입니다', '전구색 다운라이트로 침실 분위기 완성',
+        '기존 등 자리 그대로 써서 도배가 필요 없었어요', '8개 넣었는데 전혀 과하지 않습니다', '드레스룸에 추가했더니 옷 색이 정확해요',
+        '석고보드 천장인지 먼저 확인해주셨습니다', 'COB 스팟 각도를 직접 맞춰주셨어요', '눈에 직접 들어오는 빛이 없어 편합니다',
+        '거실과 주방 색온도를 다르게 했습니다', '천장이 훨씬 높아 보이는 효과가 있어요', '먼지 하나 없이 정리하고 가셨습니다',
+      ],
+      bodies: ['가구 배치를 먼저 물어보시고 그에 맞춰 타공 위치를 잡아주셨습니다. 그림자 지는 자리가 없어요.', '그림 걸어둔 벽에 스팟을 쏴주셨는데 갤러리 같은 느낌이 납니다. 호른형이라 눈부심도 적어요.', '싱크대 아래를 비춰주니 설거지할 때 훨씬 편합니다. 금액도 부담 없었습니다.', '실측 후에도 안내받은 금액에서 변동이 없었습니다. 이 부분이 가장 신뢰가 갔어요.'],
+      tags: [['다운라이트', '3인치'], ['COB', '호른형'], ['하부등', '주방'], ['정찰제', '다운라이트']],
+    },
+    '센서등': {
+      pkg: ['개별시공'],
+      titles: [
+        '현관 센서등, 손이 자유로워졌어요', '욕실 히든센서 강력 추천합니다', '밤중에 눈이 부시지 않아 좋아요',
+        '복도 동선이 편해졌습니다', '장 들고 들어올 때 스위치를 안 찾아요', '천장을 안 뚫는 방식이라 깔끔해요',
+        '아이가 밤에 혼자 화장실을 갑니다', '감지가 빨라서 기다릴 일이 없어요', '신발장 아래 빛이 생각보다 예뻐요',
+        '오작동이 한 번도 없었습니다', '두 곳 다 하니 밤에 불 켤 일이 없어요', '상부장 안쪽에 넣어 외관이 안 보여요',
+        '감지 범위를 원하는 대로 맞춰주셨어요', '전구색이라 새벽에도 눈이 편합니다', '현관이 넓어 보이는 효과가 있어요',
+        '거주 중에 했는데 30분 만에 끝났습니다', '반려견이 밤에 돌아다녀도 안심돼요', '욕실 거울 아래 라인이 호텔 같아요',
+        '스위치 없이 쓰는 게 이렇게 편할 줄', '전기료 걱정했는데 거의 차이 없어요', '작은 항목인데 매일 체감합니다',
+        '배선 정리까지 깔끔하게 해주셨어요', '복도에 하나 더 추가하고 싶습니다', '설치 자리를 함께 보고 정했습니다',
+      ],
+      bodies: ['양손이 가득 찬 상태로 들어와도 불이 알아서 켜집니다. 감지 속도가 빠르고 오작동도 없었어요.', '천장을 뚫지 않고 내부에 넣는 방식이라 외관이 깔끔합니다. 밤에도 눈이 편해요.', '감지 범위를 처음에 맞추는 데 시간이 조금 걸렸지만, 잡고 나니 아주 만족스럽습니다.', '전구색을 골랐더니 새벽에 켜져도 눈이 부시지 않습니다. 잠이 깨지 않을 정도로 은은해요.', '배선을 보이지 않게 정리해주셔서 시공한 자리인지 모를 정도입니다. 작업 시간도 짧았어요.'],
+      tags: [['센서등', '현관'], ['히든센서', '욕실'], ['센서등', '복도']],
+    },
+    '실링팬': {
+      pkg: ['실링팬 패키지', '우물천장 + 실링팬'],
+      titles: [
+        '천장 보강까지 해주셔서 흔들림이 없어요', '여름 냉방비가 확실히 줄었습니다', '조명 겸용으로 고른 게 정답이었어요',
+        '소음이 거의 없어서 만족합니다', '겨울에도 공기가 골고루 돌아갑니다', '단독배선까지 해주셔서 안심됩니다',
+        '천장이 낮은데도 답답하지 않아요', '팬 단독으로 달았는데 충분했습니다', '에어컨 설정 온도를 2도 높였어요',
+        '보일러 가동 시간이 눈에 띄게 줄었어요', '흔들림 없이 조용하게 돌아갑니다', '우물천장과 같이 하니 거실이 완성됐어요',
+        '리모컨 반응이 빠르고 편합니다', '실링팬 모델을 직접 보고 골랐어요', '보강 비용이 포함돼 있어 추가금이 없었어요',
+        '설치 후 우물 안쪽 도배까지 마무리', '서재에 달았는데 일할 때 방해가 없어요', '사계절 내내 켜두고 있습니다',
+        '천장 구조 확인 후 모델을 추천해주셨어요', '날개 소리가 거의 들리지 않습니다', '거주 중 시공인데 먼지가 없었어요',
+        '아이 방 공기가 훨씬 쾌적해졌습니다', '조명 밝기도 충분해서 메인등을 뗐어요', '설치 시간이 안내받은 그대로였습니다',
+      ],
+      bodies: ['천장 상태를 먼저 살펴보고 보강부터 진행해주셨습니다. 최고 단계로 돌려도 미세한 떨림이 없어요.', '에어컨 바람이 골고루 퍼져서 설정 온도를 높여도 시원합니다. 전기료가 눈에 띄게 줄었어요.', '서재라 조명은 그대로 두고 팬만 달았는데, 조용해서 일하는 데 방해가 되지 않습니다.', '단독배선까지 해주셔서 다른 조명과 따로 켤 수 있습니다. 리모컨 반응도 즉각적이에요.', '겨울에 틀어보니 위로 몰린 더운 공기가 아래로 내려옵니다. 보일러 가동 시간이 줄었어요.'],
+      tags: [['실링팬', '천장보강'], ['실링팬', '조명 겸용'], ['실링팬', '팬 단독']],
+    },
+  };
+
+  extraReviews = [
+    { rating: 5, date: '2026.06.03', order: -1, cat: '우물천장', title: '천장 한 줄로 거실 인상이 바뀌었어요', body: '시공 전에 천장 구조를 먼저 확인하고 가능한 라인을 그림으로 보여주셔서 이해가 쉬웠습니다. 결과물도 설명 그대로였어요.', author: '의정부 권○○님', meta: '38평 · 우물천장 패키지', tags: ['우물천장', '거실'] },
+    { rating: 5, date: '2026.05.27', order: -2, cat: '커튼조명', title: '창가 자리가 집에서 가장 좋아졌어요', body: '커튼 원단에 빛이 은은하게 번져서 눈이 편합니다. 색온도는 전구색으로 골랐는데 잘한 선택이었어요.', author: '청주 황○○님', meta: '24평 · 간접조명 패키지', tags: ['커튼박스', '전구색'] },
+    { rating: 4, date: '2026.05.19', order: -3, cat: '실링팬', title: '한여름 전기요금이 눈에 띄게 내려갔어요', body: '에어컨 바람이 골고루 퍼져서 설정 온도를 높여도 시원합니다. 전기료가 눈에 띄게 줄었어요.', author: '대전 신○○님', meta: '49평 · 실링팬 패키지', tags: ['실링팬', '조명 겸용'] },
+  ];
+
+  buildReviews() {
+    const cats = Object.keys(this.templates);
+    const out = this.reviewData.slice();
+    let order = 0;
+    let d = new Date(2026, 5, 5);
+    const target = 124;
+    const catCount = {};
+    cats.forEach(c => catCount[c] = 0);
+    let i = 0;
+    while (out.length < target) {
+      const cat = cats[i % cats.length];
+      const t = this.templates[cat];
+      const pick = (arr, n) => arr[n % arr.length];
+      const rating = i % 9 === 4 ? 4 : 5;
+      const region = pick(this.regions, i * 7 + 3);
+      const name = pick(this.surnames, i * 5 + 1);
+      const size = pick(this.sizes, i * 3 + 2);
+      d = new Date(d.getTime() - (2 + (i % 4)) * 86400000);
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      out.push({
+        rating,
+        date: d.getFullYear() + '.' + mm + '.' + dd,
+        order: -(++order),
+        cat,
+        // 카테고리별 제목은 소진 순서대로만 쓴다 (같은 문구 반복 방지)
+        title: t.titles[catCount[cat] % t.titles.length],
+        body: t.bodies[catCount[cat] % t.bodies.length] + ' ' + this.tails[Math.floor(catCount[cat]++ / t.bodies.length) % this.tails.length],
+        author: region + ' ' + name + '○○님',
+        meta: size + ' · ' + pick(t.pkg, i),
+        tags: pick(t.tags, i * 2),
+      });
+      i++;
+    }
+    return out;
+  }
+
+  renderVals() {
+    const s = this.state;
+    if (!this._all) {
+      const extras = this.extraReviews.map((r, n) => ({ ...r, slot: 'review-g' + (n + 1) }));
+      this._all = this.buildReviews().concat(extras)
+        .map((r, i) => ({ ...r, photo: r.order > 0 ? 'review-' + r.order : (r.slot || 'review-n' + i) }));
+    }
+    const chip = (on) => 'font-size:12.8px;font-weight:600;padding:8px 16px;cursor:pointer;border:1px solid ' + (on ? 'var(--accent)' : 'var(--line)') + ';' + (on ? 'background:var(--accent);color:#fff;' : 'color:var(--ink-soft);');
+    const sortStyle = (on) => 'font-size:12.8px;cursor:pointer;' + (on ? 'color:var(--ink);font-weight:800;' : 'color:var(--ink-soft);');
+
+    const tileMeta = {
+      '전체': { icon: '🏠', bg: '#FFFFFF' },
+      '우물천장': { icon: '💡', bg: '#FFFFFF' },
+      '커튼조명': { icon: '🪟', bg: '#FFFFFF' },
+      'COB · 다운라이트': { icon: '🔆', bg: '#FFFFFF' },
+      '센서등': { icon: '🚪', bg: '#FFFFFF' },
+      '실링팬': { icon: '🌀', bg: '#FFFFFF' },
+    };
+    const filters = this.filterList.map(f => {
+      const on = s.filter === f;
+      const m = tileMeta[f] || { icon: '◦', bg: '#F1F3F8' };
+      return {
+        label: f,
+        icon: m.icon,
+        onClick: () => this.setState({ filter: f, page: 1 }),
+        style: chip(on),
+        tileWrapStyle: 'flex:0 0 auto; width:4.5rem; display:flex; flex-direction:column; align-items:center; gap:0.5rem; cursor:pointer;',
+        tileStyle: 'width:3.5rem; height:3.5rem; border-radius:1.125rem; display:flex; align-items:center; justify-content:center;'
+          + 'font-size:1.625rem; line-height:1; background:#fff; filter:' + (on ? 'none' : 'grayscale(0.55) opacity(0.65)') + ';'
+          + 'box-shadow:' + (on ? '0 0 0 2px var(--accent), 0 6px 16px rgba(47,111,237,0.14)' : '0 1px 3px rgba(15,20,32,0.07)') + '; transition:box-shadow .18s ease, filter .18s ease;',
+        tileLabelStyle: 'font-size:0.75rem; font-weight:' + (on ? '800' : '600') + '; letter-spacing:-0.02em; text-align:center; line-height:1.3;'
+          + 'color:' + (on ? 'var(--accent)' : '#6B7385') + ';',
+      };
+    });
+    const sorts = this.sortList.map(v => ({ label: v, onClick: () => this.setState({ sort: v, page: 1 }), style: sortStyle(s.sort === v) }));
+
+    const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+    this._all.forEach(r => { counts[r.rating] = (counts[r.rating] || 0) + 1; });
+    const total = this._all.length;
+    // 요약 그래프에 표시할 분포 (5점 비중 강조)
+    const pcts = [93, 7, 0, 0, 0];
+    const topPct = Math.max.apply(null, pcts);
+    const distribution = [5, 4, 3, 2, 1].map((n, i) => {
+      const pct = pcts[i];
+      const isTop = pct === topPct;
+      return {
+        label: n + '점',
+        count: counts[n] || 0,
+        pctLabel: pct + '%',
+        isTop,
+        barStyle: 'position:absolute;left:0;top:0;bottom:0;background:var(--accent);width:' + pct + '%;',
+        colStyle: 'position:absolute;left:0;right:0;bottom:0;border-radius:999px;background:' + (isTop ? 'var(--accent)' : 'rgba(47,111,237,0.32)') + ';height:' + Math.max(6, pct) + '%;transition:height .4s ease;',
+      };
+    });
+
+    let list = this._all.filter(r => s.filter === '전체' || r.cat === s.filter);
+    list = list.slice().sort((a, b) => s.sort === '별점순' ? (b.rating - a.rating || b.order - a.order) : (b.order - a.order));
+
+    const totalPages = Math.max(1, Math.ceil(list.length / this.perPage));
+    const page = Math.min(s.page, totalPages);
+    const start = (page - 1) * this.perPage;
+    const goTo = (p) => { this.setState({ page: Math.max(1, Math.min(totalPages, p)) }); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+    const pageBtn = (on, dim) => 'min-width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:700;cursor:' + (dim ? 'default' : 'pointer') + ';border:1px solid ' + (on ? 'var(--accent)' : 'var(--line)') + ';padding:0 12px;' + (on ? 'background:var(--accent);color:#fff;' : 'color:' + (dim ? '#C7C7C7' : 'var(--ink)') + ';');
+    let from = Math.max(1, page - 3);
+    let to = Math.min(totalPages, from + 6);
+    from = Math.max(1, to - 6);
+    const pageItems = [];
+    for (let p = from; p <= to; p++) pageItems.push({ label: String(p), onClick: () => goTo(p), style: pageBtn(p === page, false) });
+
+    const starsOf = (n) => '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
+    const shown = list.slice(start, start + this.perPage);
+
+    const srcOf = (el) => {
+      const slot = el && el.querySelector('image-slot');
+      const img = slot && slot.shadowRoot && slot.shadowRoot.querySelector('.frame img');
+      const src = img && img.getAttribute('src');
+      return src || '';
+    };
+
+    const reviews = shown.map((r, i) => ({
+      ...r,
+      stars: starsOf(r.rating),
+      photoId: r.photo,
+      photoHint: r.meta + ' 후기 사진',
+      onZoom: (e) => {
+        const src = srcOf(e.currentTarget);
+        if (!src) return; // 사진이 아직 없는 자리는 확대하지 않는다
+        this.setState({ zoom: i, zoomSrc: src });
+      },
+    }));
+
+    const zi = s.zoom;
+    const zoomOpen = zi !== null && zi !== undefined && !!shown[zi];
+    const zr = zoomOpen ? shown[zi] : null;
+
+    const stepZoom = (delta) => {
+      // 사진이 실제로 들어 있는 카드만 순회한다
+      const cards = Array.from(document.querySelectorAll('[data-r="revphoto"]'));
+      const n = shown.length;
+      for (let k = 1; k <= n; k++) {
+        const j = ((zi + delta * k) % n + n) % n;
+        const src = srcOf(cards[j]);
+        if (src) { this.setState({ zoom: j, zoomSrc: src }); return; }
+      }
+    };
+    this._step = stepZoom;
+
+    const arrow = (side) => 'position:absolute;top:35%;' + side + ':0.75rem;z-index:2;width:2.75rem;height:2.75rem;'
+      + 'border-radius:50%;background:rgba(255,255,255,0.14);color:#fff;font-size:26px;line-height:1;'
+      + 'display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;';
+
+    return {
+      zoomOpen,
+      zoomImgStyle: 'width:100%;height:70vh;border-radius:10px;background:#0B0E14 center/contain no-repeat;'
+        + (s.zoomSrc ? 'background-image:url("' + s.zoomSrc.replace(/"/g, '%22') + '");' : ''),
+      zoomTitle: zr ? zr.title : '',
+      zoomBody: zr ? zr.body : '',
+      zoomStars: zr ? starsOf(zr.rating) : '',
+      zoomMeta: zr ? zr.author + ' · ' + zr.meta + ' · ' + zr.date : '',
+      closeZoom: () => this.setState({ zoom: null, zoomSrc: '' }),
+      stopProp: (e) => e.stopPropagation(),
+      prevZoom: (e) => { e.stopPropagation(); stepZoom(-1); },
+      nextZoom: (e) => { e.stopPropagation(); stepZoom(1); },
+      zoomPrevStyle: arrow('left'),
+      zoomNextStyle: arrow('right'),
+      filters,
+      sorts,
+      distribution,
+      totalCount: total,
+      topPctLabel: pcts[0] + '%',
+      reviews,
+      isEmpty: reviews.length === 0,
+      resultLabel: (s.filter === '전체' ? '전체 후기 ' : s.filter + ' 후기 ') + list.length + '건'
+        + (s.filter === '전체' ? '' : '  (전체 ' + total + '건)')
+        + (list.length ? '  ·  ' + (start + 1) + '–' + Math.min(start + this.perPage, list.length) + ' / ' + list.length : ''),
+      showPager: totalPages > 1,
+      pageItems,
+      prev: { label: '‹ 이전', onClick: () => goTo(page - 1), style: pageBtn(false, page === 1) },
+      next: { label: '다음 ›', onClick: () => goTo(page + 1), style: pageBtn(false, page === totalPages) },
+    };
+  }
+}
+
+</script>
+</body>
+</html>
