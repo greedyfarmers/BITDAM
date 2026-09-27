@@ -121,7 +121,7 @@ function siteHeader() {
     + '<a href="' + BLOG_PATH + '/" style="color:' + BRAND.accent + '; font-weight:700; text-decoration:none;">조명 가이드</a>'
     + '<a href="/상세견적.dc.html" style="color:' + BRAND.soft + '; text-decoration:none;">셀프견적</a>'
     + '</nav>'
-    + '<span style="font-size:13px; color:' + BRAND.soft + ';">전화상담 <b style="color:' + BRAND.ink + ';">010-9850-2293</b></span>'
+    + '<span style="font-size:13px; color:' + BRAND.soft + ';">전화상담 <b style="color:' + BRAND.ink + ';">010-9298-3343</b></span>'
     + '</div></header>';
 }
 
@@ -129,7 +129,7 @@ function siteFooter() {
   return '<footer style="background:' + BRAND.dark + '; color:#B8BECC; padding:40px 0; margin-top:56px;">'
     + '<div style="max-width:1160px; margin:0 auto; padding:0 24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; font-size:13px;">'
     + '<a href="/" style="color:#fff; font-weight:900; font-size:16px; text-decoration:none;">PROR.CO</a>'
-    + '<span>대표번호 <b style="color:#fff;">010-9850-2293</b></span>'
+    + '<span>대표번호 <b style="color:#fff;">010-9298-3343</b></span>'
     + '</div></footer>';
 }
 

@@ -102,7 +102,7 @@ styled-components 등)으로 옮기십시오. 모든 스타일은 현재 인라�
   - `개별항목` (호버 드롭다운: 우물천장조명 / 커튼조명 / 다운라이트·COB / 욕실·현관 센서등 / 실링팬)
   - `색상안내`, `셀프견적`, `시공사례`, `시공후기`, `고객센터`
   - 현재 페이지: `--accent` + weight 700
-- 우: `전화상담 010-9850-2293`
+- 우: `전화상담 010-9298-3343`
 - **드롭다운 스펙**: `position:absolute; top:28px; left:50%; translateX(-50%)`, min-width 190px,
   padding `12px 0`, radius 14px, 1px 보더, shadow `0 18px 40px rgba(15,20,32,0.12)`,
   `opacity/visibility` transition 0.18s, 항목 padding `9px 20px` / 13px, hover `--accent` + `rgba(47,111,237,0.06)`
@@ -111,7 +111,7 @@ styled-components 등)으로 옮기십시오. 모든 스타일은 현재 인라�
 세로 스택, gap 12px, 가운데 정렬.
 - **전화상담**: 66px 원형, `radial-gradient(circle at 34% 26%, #2a3a63, #0E1526 72%)`, 흰 텍스트,
   1px `rgba(255,255,255,0.14)` 보더, 아이콘 📞 17px + 라벨 11.5px/800 2줄 구성
-  → `<a href="tel:010-9850-2293">`
+  → `<a href="tel:010-9298-3343">`
   - 링 펄스: `inset:-1px` 원형, `2px solid currentColor`, `ringPulse 2.4s ease-out infinite`
     (`0%: scale(1) opacity .55 → 70%: scale(1.5) opacity 0`)
 - **카톡상담**: 동일 66px 원형, `radial-gradient(circle at 34% 26%, #FFF4A0, #FFE94A 70%)`,
@@ -402,7 +402,7 @@ styled-components 등)으로 옮기십시오. 모든 스타일은 현재 인라�
   Tailwind breakpoint나 컨테이너 쿼리로 정식 구현하십시오.
 
 ## 연락처 · 링크
-- 대표번호: **010-9850-2293** → `tel:010-9850-2293`
+- 대표번호: **010-9298-3343** → `tel:010-9298-3343`
 - 카카오 채널: **`http://pf.kakao.com/_xdBVxaX/chat`** (새 창)
 - 사업자: 상호 빛담조명 / 대표 오익재 / 사업자등록번호 797-04-02376
 
