@@ -152,7 +152,7 @@ export const PAGES = {
     h1: '시공사례',
     body: [
       '실제로 시공한 현장 사진을 항목별로 정리했습니다. 우물천장, 커튼조명, COB 간접등, 다운라이트, 실링팬, 센서등 시공 사례를 확인하실 수 있습니다.',
-      '서울, 인천, 경기, 대구, 부산, 천안 등 전국에서 시공하고 있습니다.',
+      '창원, 김해, 양산, 진주, 거제, 통영 등 경남 전 지역에서 시공하고 있습니다.',
     ],
   },
 
@@ -188,8 +188,9 @@ const ORG_JSONLD = {
   alternateName: 'PROR.CO',
   url: SITE,
   telephone: '+82-10-9850-2293',
-  description: '우물천장 조명, 간접조명, 실링팬 정찰제 시공',
-  areaServed: 'KR',
+  description: '경남 전 지역 우물천장 조명, 간접조명, 실링팬 정찰제 시공',
+  areaServed: { '@type': 'State', name: '경상남도' },
+  address: { '@type': 'PostalAddress', addressCountry: 'KR', addressRegion: '부산광역시', addressLocality: '수영구', streetAddress: '광안해변로 350 2층' },
 };
 
 /** <head>에 넣을 정적 메타 */
