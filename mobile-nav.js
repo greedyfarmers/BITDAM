@@ -147,7 +147,6 @@
           <nav>
             <div class="quick">
               <a href="tel:010-9298-3343"><i>📞</i>전화상담</a>
-              <a href="https://open.kakao.com/o/s10oFC5" target="_blank" rel="noopener"><i>💬</i>카톡상담</a>
               <a href="./고객센터.dc.html"><i>🎧</i>고객센터</a>
             </div>
             <div class="card" data-tagcard>
@@ -165,7 +164,6 @@
           </nav>
           <div class="cta">
             <a class="tel" href="tel:010-9298-3343">전화상담</a>
-            <a class="kakao" href="https://open.kakao.com/o/s10oFC5" target="_blank" rel="noopener">카톡상담</a>
           </div>
         </div>`;
 

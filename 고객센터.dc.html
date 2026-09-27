@@ -78,20 +78,16 @@
       <span data-ico="1">📞</span>
       <span>전화상담</span>
     </a>
-    <a href="https://open.kakao.com/o/s10oFC5" target="_blank" rel="noopener" data-fab="1" style="background:radial-gradient(circle at 34% 26%, #FFF4A0, #FFE94A 70%); color:#2C2200; border:1px solid rgba(0,0,0,0.08);">
-      <span data-ico="1">💬</span>
-      <span>카톡상담</span>
-    </a>
     <a href="#" style="width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--ink); font-size:16px; border:1px solid var(--line); background:rgba(255,255,255,0.92); box-shadow:0 10px 22px rgba(15,20,32,0.12);">↑</a>
   </div>
 
   <div style="max-width:1160px; margin:0 auto; padding:48px 24px 0;">
     <div style="font-size:11.5px; letter-spacing:1.5px; color:var(--accent); font-weight:700; margin-bottom:10px;">BITDAM SUPPORT</div>
     <h1 style="font-size:30px; font-weight:800; margin:0 0 10px; line-height:1.3;">고객센터</h1>
-    <p style="color:var(--ink-soft); font-size:14px; margin:0 0 32px; line-height:1.75; max-width:660px;">문의 · 상담 · A/S를 한곳에서 안내드립니다. 급한 문의는 전화가 가장 빠르고, 사진을 보내실 때는 카카오톡이 편합니다.</p>
+    <p style="color:var(--ink-soft); font-size:14px; margin:0 0 32px; line-height:1.75; max-width:660px;">문의 · 상담 · A/S를 한곳에서 안내드립니다. 상담은 전화로 가장 빠르게 도와드립니다.</p>
 
     <!-- contact channels -->
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:44px;">
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:44px;">
       <sc-for list="{{ channels }}" as="ch" hint-placeholder-count="3">
         <div style="border:1px solid var(--line); padding:26px; display:flex; flex-direction:column; gap:8px;">
           <div style="font-size:11px; letter-spacing:1px; color:var(--accent); font-weight:700;">{{ ch.eyebrow }}</div>
@@ -174,12 +170,11 @@ class Component extends DCLogic {
 
   channels = [
     { eyebrow: 'PHONE', title: '전화상담', desc: '가장 빠르게 답을 드립니다. 시공 일정, 금액, A/S 모두 전화로 문의 가능합니다.', hours: '평일 09:00 – 17:30 (점심 12:30 – 13:30) · 주말·공휴일 휴무', cta: '010-9298-3343', href: 'tel:010-9298-3343', primary: true },
-    { eyebrow: 'KAKAO', title: '카카오톡 상담', desc: '공간 사진을 보내주시면 필요한 항목과 예상 금액을 정리해서 알려드립니다.', hours: '상시 접수 · 영업시간 내 순차 답변', cta: '카카오톡 문의하기', href: 'https://open.kakao.com/o/s10oFC5' },
     { eyebrow: 'SELF', title: '셀프견적', desc: '원하는 항목을 직접 담으면 금액이 실시간으로 합산됩니다. 상담 없이도 확인 가능합니다.', hours: '24시간 이용 가능', cta: '셀프견적 시작하기', href: './상세견적.dc.html' },
   ];
 
   steps = [
-    { n: '01', title: '문의 · 상담', desc: '전화나 카카오톡으로 평형과 원하시는 항목을 알려주세요. 셀프견적을 먼저 해보셔도 좋습니다.' },
+    { n: '01', title: '문의 · 상담', desc: '전화로 평형과 원하시는 항목을 알려주세요. 셀프견적을 먼저 해보셔도 좋습니다.' },
     { n: '02', title: '견적 확정', desc: '정찰제 금액 그대로 안내드리고, 천장 구조에 따른 추가 항목이 있으면 미리 설명드립니다.' },
     { n: '03', title: '일정 예약', desc: '원하시는 날짜로 시공 일정을 잡습니다. 입주 전 시공을 가장 추천드립니다.' },
     { n: '04', title: '시공 · A/S', desc: '당일 실측 후 시공을 진행하고, 시공 후 1년간 무상 A/S를 보장합니다.' },
@@ -190,7 +185,7 @@ class Component extends DCLogic {
     { badge: '공지', title: '추석 연휴 시공 일정 안내 (9/28 – 10/1 휴무)', date: '2026.08.14', type: 'notice' },
     { badge: '이벤트', title: '시공 후 사진 후기 등록 시 감사 쿠폰 지급', date: '2026.08.02', type: 'event' },
     { badge: '공지', title: '3색변환 · 디밍 COB 자재 단가 조정 안내', date: '2026.07.21', type: 'notice' },
-    { badge: '공지', title: 'A/S 접수 절차 변경 안내 (전화 · 카카오톡 통합)', date: '2026.07.05', type: 'notice' },
+    { badge: '공지', title: 'A/S 접수 절차 변경 안내 (전화 접수 일원화)', date: '2026.07.05', type: 'notice' },
   ];
 
   faqData = [

@@ -136,10 +136,10 @@ function siteFooter() {
 function ctaBlock() {
   return '<div style="max-width:760px; margin:48px auto 0; padding:32px 28px; background:#fff; border:1px solid ' + BRAND.line + '; border-radius:18px; text-align:center;">'
     + '<div style="font-size:20px; font-weight:800; letter-spacing:-0.04em; color:' + BRAND.ink + '; margin-bottom:10px;">우리 집 견적이 궁금하신가요?</div>'
-    + '<div style="font-size:14px; color:' + BRAND.soft + '; line-height:1.8; margin-bottom:22px;">셀프견적으로 예상 금액을 먼저 확인하시거나,<br>카카오톡으로 편하게 상담받으실 수 있습니다.</div>'
+    + '<div style="font-size:14px; color:' + BRAND.soft + '; line-height:1.8; margin-bottom:22px;">셀프견적으로 예상 금액을 먼저 확인하시거나,<br>전화로 편하게 상담받으실 수 있습니다.</div>'
     + '<div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">'
     + '<a href="/상세견적.dc.html" style="display:inline-flex; align-items:center; min-height:48px; padding:0 22px; border-radius:999px; background:' + BRAND.accent + '; color:#fff; font-size:14px; font-weight:800; text-decoration:none;">셀프견적 시작하기</a>'
-    + '<a href="https://open.kakao.com/o/s10oFC5" style="display:inline-flex; align-items:center; min-height:48px; padding:0 22px; border-radius:999px; background:' + BRAND.dark + '; color:#fff; font-size:14px; font-weight:800; text-decoration:none;">카카오로 상담하기</a>'
+    + '<a href="tel:010-9298-3343" style="display:inline-flex; align-items:center; min-height:48px; padding:0 22px; border-radius:999px; background:' + BRAND.dark + '; color:#fff; font-size:14px; font-weight:800; text-decoration:none;">전화로 상담하기</a>'
     + '</div></div>';
 }
 
