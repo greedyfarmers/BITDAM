@@ -115,7 +115,7 @@ const FONT = "'Pretendard','Apple SD Gothic Neo',-apple-system,BlinkMacSystemFon
 function siteHeader() {
   return '<header style="border-bottom:1px solid ' + BRAND.line + '; background:rgba(251,250,247,0.92);">'
     + '<div style="max-width:1160px; margin:0 auto; padding:18px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px;">'
-    + '<a href="/" style="font-size:20px; font-weight:900; letter-spacing:-0.5px; color:' + BRAND.ink + '; text-decoration:none;">PROR.CO</a>'
+    + '<a href="/" style="font-size:20px; font-weight:900; letter-spacing:-0.5px; color:' + BRAND.ink + '; text-decoration:none;">빛담조명</a>'
     + '<nav style="display:flex; gap:18px; font-size:14px;">'
     + '<a href="/" style="color:' + BRAND.soft + '; text-decoration:none;">홈</a>'
     + '<a href="' + BLOG_PATH + '/" style="color:' + BRAND.accent + '; font-weight:700; text-decoration:none;">조명 가이드</a>'
@@ -128,7 +128,7 @@ function siteHeader() {
 function siteFooter() {
   return '<footer style="background:' + BRAND.dark + '; color:#B8BECC; padding:40px 0; margin-top:56px;">'
     + '<div style="max-width:1160px; margin:0 auto; padding:0 24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; font-size:13px;">'
-    + '<a href="/" style="color:#fff; font-weight:900; font-size:16px; text-decoration:none;">PROR.CO</a>'
+    + '<a href="/" style="color:#fff; font-weight:900; font-size:16px; text-decoration:none;">빛담조명</a>'
     + '<span>대표번호 <b style="color:#fff;">010-9298-3343</b></span>'
     + '</div></footer>';
 }
@@ -176,7 +176,7 @@ export function listPage(items, opts = {}) {
     + '</body>\n</html>\n';
 
   return head({
-    title: '조명 가이드 | PROR.CO',
+    title: '조명 가이드 | 빛담조명',
     description: '우물천장·간접조명·실링팬 시공 가이드',
     canonical,
     locale,
@@ -211,7 +211,7 @@ export function postPage(item) {
     + '</body>\n</html>\n';
 
   return head({
-    title: item.title + ' | PROR.CO',
+    title: item.title + ' | 빛담조명',
     description: item.summary || '',
     canonical,
     locale,

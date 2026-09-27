@@ -56,8 +56,8 @@
     :host([open]) .sheet{opacity:1;visibility:visible;transform:translateX(0);}
     .top{display:flex;align-items:center;justify-content:space-between;
       padding:1rem 1.125rem 0.75rem;background:#F3F5F9;flex:0 0 auto;}
-    .mark{font-size:1.3125rem;font-weight:900;letter-spacing:-0.5px;
-      font-family:'ArchivoExpandedBlack','Archivo',sans-serif;color:#111;text-decoration:none;}
+    .mark{font-size:1.875rem;font-weight:400;letter-spacing:0;line-height:1;
+      font-family:'Gamja Flower',cursive;-webkit-text-stroke:0.9px currentColor;color:#111;text-decoration:none;}
     .close{width:2.5rem;height:2.5rem;font-size:1.5rem;line-height:1;color:#111;text-align:center;}
     .searchwrap{flex:0 0 auto;padding:0 1.125rem 0.875rem;background:#F3F5F9;}
     .search{display:flex;align-items:center;gap:0.625rem;background:#fff;border-radius:999px;
@@ -134,7 +134,7 @@
       proot.innerHTML = `<style>${CSS}</style>
         <div class="sheet" role="dialog" aria-modal="true">
           <div class="top">
-            <a class="mark" href="./PRORCO 홈페이지.dc.html">PROR.CO</a>
+            <a class="mark" href="./PRORCO 홈페이지.dc.html">빛담조명</a>
             <button class="close" aria-label="메뉴 닫기">✕</button>
           </div>
           <div class="searchwrap">

@@ -185,7 +185,7 @@ const ORG_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: '빛담조명',
-  alternateName: 'PROR.CO',
+  alternateName: 'BITDAM',
   url: SITE,
   telephone: '+82-10-9298-3343',
   description: '경남 전 지역 우물천장 조명, 간접조명, 실링팬 정찰제 시공',
